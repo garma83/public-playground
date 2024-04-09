@@ -1,21 +1,28 @@
 from shapely.geometry import LineString, Polygon, MultiPolygon, Point
+from rtree import index
 
 def skikit_merge_holes_tuples(polygons):
 
     exteriorPolygons = []  # List to store tuples of (exterior polygon, associated interior polygons)
     # print("Start merging holes: Step 1")
 
+    idx = index.Index()
+    for i, polygon in enumerate(polygons):
+        idx.insert(i, polygon.bounds)
+
     # Step 1: Identify exterior polygons and associate them with interior polygons
-    polygons = sorted(polygons, key=lambda x: x.area or x.boundingBoxSize)
-    for polygon in polygons:
+    # polygons = sorted(polygons, key=lambda x: x.area or x.boundingBoxSize)
+    for i, polygon in enumerate(polygons):
 
         # print("Processing polygon with", len(polygon.exterior.coords), "points")
 
         isExterior = True
         first_point = Point(polygon.exterior.coords[0])
 
-        for otherPolygon in polygons:
-            if polygon != otherPolygon and otherPolygon.contains(first_point):
+        for j in idx.intersection((first_point.x, first_point.y)):
+            # print(j, len(exterior_polygons))
+            otherPolygon = polygons[j]
+            if i != j and otherPolygon.contains(first_point):
                 isExterior = False
                 
         if isExterior:
@@ -23,9 +30,12 @@ def skikit_merge_holes_tuples(polygons):
             associatedInteriors = []
 
             # find all holes in this polygon
-            for otherPolygon in polygons:
+            for j in idx.intersection(polygon.bounds):
+                otherPolygon = polygons[j]
+
+            # for otherPolygon in polygons:
                 other_first_point = Point(otherPolygon.exterior.coords[0])
-                if polygon != otherPolygon and polygon.contains(other_first_point):
+                if i != j and polygon.contains(other_first_point):
                     associatedInteriors.append(otherPolygon)
 
             # print("Found", len(associatedInteriors), "holes")
