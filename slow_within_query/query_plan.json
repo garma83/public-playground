@@ -1,0 +1,145 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Limit",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 1001.00,
+      "Total Cost": 509084.32,
+      "Plan Rows": 100,
+      "Plan Width": 12,
+      "Actual Startup Time": 5848.341,
+      "Actual Total Time": 7169.019,
+      "Actual Rows": 100,
+      "Actual Loops": 1,
+      "Plans": [
+        {
+          "Node Type": "Aggregate",
+          "Strategy": "Sorted",
+          "Partial Mode": "Finalize",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 1001.00,
+          "Total Cost": 42092264965.25,
+          "Plan Rows": 8284520,
+          "Plan Width": 12,
+          "Actual Startup Time": 5848.339,
+          "Actual Total Time": 7168.917,
+          "Actual Rows": 100,
+          "Actual Loops": 1,
+          "Group Key": ["perceel.ogc_fid"],
+          "Plans": [
+            {
+              "Node Type": "Gather Merge",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 1001.00,
+              "Total Cost": 42092099274.85,
+              "Plan Rows": 16569040,
+              "Plan Width": 12,
+              "Actual Startup Time": 5830.171,
+              "Actual Total Time": 7168.427,
+              "Actual Rows": 101,
+              "Actual Loops": 1,
+              "Workers Planned": 2,
+              "Workers Launched": 2,
+              "Plans": [
+                {
+                  "Node Type": "Aggregate",
+                  "Strategy": "Sorted",
+                  "Partial Mode": "Partial",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Startup Cost": 0.98,
+                  "Total Cost": 42090185796.49,
+                  "Plan Rows": 8284520,
+                  "Plan Width": 12,
+                  "Actual Startup Time": 40.854,
+                  "Actual Total Time": 5195.833,
+                  "Actual Rows": 354,
+                  "Actual Loops": 3,
+                  "Group Key": ["perceel.ogc_fid"],
+                  "Workers": [
+                  ],
+                  "Plans": [
+                    {
+                      "Node Type": "Nested Loop",
+                      "Parent Relationship": "Outer",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Join Type": "Left",
+                      "Startup Cost": 0.98,
+                      "Total Cost": 41922854733.60,
+                      "Plan Rows": 33449643538,
+                      "Plan Width": 4,
+                      "Actual Startup Time": 22.149,
+                      "Actual Total Time": 5089.322,
+                      "Actual Rows": 924003,
+                      "Actual Loops": 3,
+                      "Inner Unique": false,
+                      "Workers": [
+                      ],
+                      "Plans": [
+                        {
+                          "Node Type": "Index Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": true,
+                          "Async Capable": false,
+                          "Scan Direction": "Forward",
+                          "Index Name": "perceel_pkey",
+                          "Relation Name": "perceel",
+                          "Alias": "perceel",
+                          "Startup Cost": 0.43,
+                          "Total Cost": 735302.88,
+                          "Plan Rows": 3451883,
+                          "Plan Width": 36,
+                          "Actual Startup Time": 0.025,
+                          "Actual Total Time": 1.119,
+                          "Actual Rows": 355,
+                          "Actual Loops": 3,
+                          "Workers": [
+                          ]
+                        },
+                        {
+                          "Node Type": "Index Scan",
+                          "Parent Relationship": "Inner",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Scan Direction": "NoMovement",
+                          "Index Name": "verblijfsobject_ext_geom_geog_gix",
+                          "Relation Name": "verblijfsobject_ext",
+                          "Alias": "verblijfsobject_ext",
+                          "Startup Cost": 0.55,
+                          "Total Cost": 12135.02,
+                          "Plan Rows": 969,
+                          "Plan Width": 32,
+                          "Actual Startup Time": 0.185,
+                          "Actual Total Time": 14.012,
+                          "Actual Rows": 2605,
+                          "Actual Loops": 1064,
+                          "Index Cond": "((geom)::geography && _st_expand((perceel.plaatscoordinaten)::geography, '5000'::double precision))",
+                          "Rows Removed by Index Recheck": 0,
+                          "Filter": "st_dwithin((perceel.plaatscoordinaten)::geography, (geom)::geography, '5000'::double precision, true)",
+                          "Rows Removed by Filter": 1737,
+                          "Workers": [
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Planning Time": 0.228,
+    "Triggers": [
+    ],
+    "Execution Time": 7169.207
+  }
+]
