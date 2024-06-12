@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.pem
+.env
+tmp
+venv
+log.txt
+.DS_Store
+celerybeat-schedule.db
+dump.rdb
