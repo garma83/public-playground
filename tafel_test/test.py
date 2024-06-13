@@ -4,6 +4,7 @@ import argparse
 from colorama import Fore, Style
 
 def main(tafel):
+    os.system('clear')
     score = 0
     for _ in range(10):
         a = random.randint(1, 10)
@@ -16,7 +17,7 @@ def main(tafel):
             print(f"{Fore.RED}Helaas... Het goede antwoord is {a * tafel}.{Style.RESET_ALL}")
     print(f"Van de 10 vragen heb je er {score} goed.")
     with open("scores.txt", "a") as file:
-        file.write(f"Score: {score}\n")
+        file.write(f"Score voor tafel {tafel}: {score}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
