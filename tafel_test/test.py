@@ -11,9 +11,9 @@ def main(tafel):
         tafel = int(tafel)
         os.system('clear')
         score = 0
-        for _ in range(10):
+        for i in range(10):
             a = random.randint(1, 10)
-            answer = input(f"Wat is {a} x {tafel}? ")
+            answer = input(f"Vraag {i+1}: Wat is {a} x {tafel}? ")
             os.system('clear')
             if answer == str(a * tafel):
                 print(f"{Fore.GREEN}Heel goed! :) {a} x {tafel} is inderdaad {a * tafel}.{Style.RESET_ALL}")
