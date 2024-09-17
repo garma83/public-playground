@@ -98,3 +98,13 @@ Score voor tafel 12355678: 0
 Score voor tafel 8: 3
 Score voor tafel 8: 10
 Score voor tafel 8: 10
+Score voor tafel 2: 2
+Score voor tafel 1: 9
+Score voor tafel 2: 2
+Score voor tafels 1, 2: 2
+Score voor tafels 1, 2: 2 van 2
+Score voor tafels 1, 5, 10: 20 van 20
+Score voor tafels 1, 5, 10: 1 van 20
+Score voor tafels 1, 5, 10: 20 van 20
+Score voor tafels 1, 5, 10: 9 van 20
+Score voor tafels 1, 5, 10: 20 van 20
