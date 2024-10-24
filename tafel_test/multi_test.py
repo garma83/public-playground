@@ -16,7 +16,15 @@ def main(tafels):
     for i in range(nrquestions):
         tafel = random.choice(tafels)
         a = random.randint(1, 10)
-        answer = input(f"Vraag {i+1}: Wat is {a} x {tafel}? ")
+
+        while True:
+            answer = input(f"Vraag {i+1}: Wat is {a} x {tafel}? ")
+            if answer.isdigit():
+                break
+            else:
+                print(f"{Fore.RED}Ongeldige invoer. Voer een getal in.{Style.RESET_ALL}")
+
+        # answer = input(f"Vraag {i+1}: Wat is {a} x {tafel}? ")
         os.system('clear')
         if answer == str(a * tafel):
             print(f"{Fore.GREEN}Heel goed! :) {a} x {tafel} is inderdaad {a * tafel}.{Style.RESET_ALL}")
